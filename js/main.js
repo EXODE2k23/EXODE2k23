@@ -1,4 +1,3 @@
-
 (function ($) {
     "use strict";
 
@@ -69,3 +68,61 @@
     
 
 })(jQuery);
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBqB_bEPfQFKD2Sg16pNmep5RjI1fm7Bk0",
+    authDomain: "exode-a0a16.firebaseapp.com",
+    projectId: "exode-a0a16",
+    storageBucket: "exode-a0a16.appspot.com",
+    messagingSenderId: "409347321227",
+    appId: "1:409347321227:web:bd46c86dbeadd43d18938e"
+  };
+
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+var form = document.querySelector('#form')
+var r_form = document.querySelector('#registerform')
+
+// user login
+if(form){
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let email = form.username.value;
+        let password = form.password.value;
+    
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            window.location = 'index1.html';
+        })
+        .catch((error) => {
+            message.style.display = 'block';
+            message_value.innerText = error.message;
+            setTimeout(function(){
+                message.style.display = 'none';
+            }, 3000);
+        });
+    })
+}
+
+// user register
+if(r_form){
+    r_form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let email = r_form.username.value;
+        let password = r_form.password.value;
+    
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            window.location = 'home.html';
+        })
+        .catch((error) => {
+            message.style.display = 'block';
+            message_value.innerText = error.message;
+            setTimeout(function(){
+                message.style.display = 'none';
+            }, 3000);
+        });
+    })
+}
