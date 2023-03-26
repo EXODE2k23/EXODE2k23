@@ -75,27 +75,25 @@ var r_form = document.querySelector('#registerform')
 var message = document.querySelector('#messageDiv');
 var message_value = document.querySelector('.message');
 var sign_out = document.querySelector('#signout')
+var user = firebase.auth().currentUser;
 
-//// check if user is logged in or not
-//firebase.auth().onAuthStateChanged(function(user) {
-//    if (user) {
-//        if(window.location.pathname != '/index1.html'){
-//            window.location = 'index1.html';
-//        }
-//    } else {
-//        if(window.location.pathname === '/index1.html'){
-//            window.location = 'index.html';
-//        }
-//    }
-//});
+// check if user is logged in or not
+if (user) {
+    if(window.location.pathname != '/index1.html') {
+        window.location = 'index1.html';
+    }
+} else {
+    if(window.location.pathname === '/index1.html') {
+        window.location = 'index.html';
+    }
+}
 
 // user login
-if(form){
+if(form) {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         let email = form.username.value;
         let password = form.password.value;
-    
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
             window.location = 'index1.html';
@@ -111,15 +109,14 @@ if(form){
 }
 
 // user register
-if(r_form){
+if(r_form) {
     r_form.addEventListener('submit', function(e) {
         e.preventDefault();
         let email = r_form.username.value;
         let password = r_form.password.value;
-    
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            window.location = 'home.html';
+            window.location = 'index1.html';
         })
         .catch((error) => {
             message.style.display = 'block';
@@ -132,7 +129,7 @@ if(r_form){
 }
 
 // sign out  
-if(sign_out){
+if(sign_out) {
     sign_out.addEventListener('click', function(e) {
         firebase.auth().signOut().then(() => {
             window.location = 'index.html';
