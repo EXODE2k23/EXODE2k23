@@ -1,9 +1,6 @@
 (function ($) {
     "use strict";
-
-
-     /*==================================================================
-    [ Focus input ]*/
+     /*==================================================================    [ Focus input ]*/
     $('.input100').each(function(){
         $(this).on('blur', function(){
             if($(this).val().trim() != "") {
@@ -16,23 +13,18 @@
     })
   
   
-    /*==================================================================
-    [ Validate ]*/
+    /*==================================================================    [ Validate ]*/
     var input = $('.validate-input .input100');
-
     $('.validate-form').on('submit',function(){
         var check = true;
-
         for(var i=0; i<input.length; i++) {
             if(validate(input[i]) == false){
                 showValidate(input[i]);
                 check=false;
             }
         }
-
         return check;
     });
-
 
     $('.validate-form .input100').each(function(){
         $(this).focus(function(){
@@ -61,12 +53,8 @@
 
     function hideValidate(input) {
         var thisAlert = $(input).parent();
-
         $(thisAlert).removeClass('alert-validate');
     }
-    
-    
-
 })(jQuery);
 
 const firebaseConfig = {
@@ -84,6 +72,22 @@ firebase.initializeApp(firebaseConfig);
 
 var form = document.querySelector('#form')
 var r_form = document.querySelector('#registerform')
+var message = document.querySelector('#messageDiv');
+var message_value = document.querySelector('.message');
+var sign_out = document.querySelector('#signout')
+
+//// check if user is logged in or not
+//firebase.auth().onAuthStateChanged(function(user) {
+//    if (user) {
+//        if(window.location.pathname != '/index1.html'){
+//            window.location = 'index1.html';
+//        }
+//    } else {
+//        if(window.location.pathname === '/index1.html'){
+//            window.location = 'index.html';
+//        }
+//    }
+//});
 
 // user login
 if(form){
@@ -123,6 +127,17 @@ if(r_form){
             setTimeout(function(){
                 message.style.display = 'none';
             }, 3000);
+        });
+    })
+}
+
+// sign out  
+if(sign_out){
+    sign_out.addEventListener('click', function(e) {
+        firebase.auth().signOut().then(() => {
+            window.location = 'index.html';
+        }).catch((error) => {
+        // An error happened.
         });
     })
 }
