@@ -6,7 +6,6 @@ import $ from 'jquery';
 import DataTable from 'datatables.net-bs4';
 import SearchPanes from 'datatables.net-searchpanes';
 
-
 $.extend(true, DataTable.SearchPane.classes, {
     buttonGroup: 'btn-group',
     disabledButton: 'disabled',
@@ -30,6 +29,7 @@ $.extend(true, DataTable.SearchPanes.classes, {
     container: 'dtsp-searchPanes',
     disabledButton: 'disabled',
     panes: 'dtsp-panes dtsp-panesContainer',
+    search: DataTable.SearchPane.classes.search,
     showAll: 'dtsp-showAll btn btn-light',
     title: 'dtsp-title',
     titleRow: 'dtsp-titleRow'

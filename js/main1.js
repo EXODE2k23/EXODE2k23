@@ -80,14 +80,11 @@ var user = firebase.auth().currentUser;
 
 // check if user is logged in or not
 if (user) {
-    if(window.location.pathname != '/index1.html') {
-        window.location = 'index1.html';
-    }
+    window.location = 'index1.html';
 } else {
-    if(window.location.pathname === '/index1.html') {
-        window.location = 'index.html';
-    }
+window.location = 'index.html';
 }
+
 
 // user login
 if(form) {
