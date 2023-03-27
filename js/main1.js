@@ -142,9 +142,9 @@ if(sign_out) {
 
 // password reset 
 if(reset){
-    reset_form.addEventListener('submit', function(e) {
+    reset.addEventListener('submit', function(e) {
         e.preventDefault();
-        let email = reset_form.username.value;
+        let email = reset.username.value;
         firebase.auth().sendPasswordResetEmail(email)
         .then((userCredential) => {
             message.style.display = 'block';
