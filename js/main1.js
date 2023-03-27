@@ -72,6 +72,7 @@ firebase.initializeApp(firebaseConfig);
 
 var form = document.querySelector('#form')
 var r_form = document.querySelector('#registerform')
+var reset = document.querySelector('#resetform')
 var message = document.querySelector('#messageDiv');
 var message_value = document.querySelector('.message');
 var sign_out = document.querySelector('#signout')
@@ -135,6 +136,27 @@ if(sign_out) {
             window.location = 'index.html';
         }).catch((error) => {
         // An error happened.
+        });
+    })
+}
+
+// password reset 
+if(reset){
+    reset_form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let email = reset_form.username.value;
+        firebase.auth().sendPasswordResetEmail(email)
+        .then((userCredential) => {
+            message.style.display = 'block';
+            message_value.innerText = 'Email has been send!';
+            window.location = 'index.html';
+        })
+        .catch((error) => {
+            message.style.display = 'block';
+            message_value.innerText = error.message;
+            setTimeout(function(){
+                message.style.display = 'none';
+            }, 3000);
         });
     })
 }
